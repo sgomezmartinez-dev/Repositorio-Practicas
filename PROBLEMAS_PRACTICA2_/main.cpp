@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-
+#include <iostream>
 /*Problema 1:Se necesita un programa que permita determinar la mínima combinación de billetes y monedas para
 una cantidad de dinero determinada. Los billetes en circulación son de $50.000, $20.000, $10.000, $5.000, $2.000
 y $1.000, y las monedas son de $500, $200, $100 y $50. Hacer un programa que entregue el número de billetes y monedas
@@ -76,8 +76,130 @@ rectángulo C (con la misma estructura descrita anteriormente) que corresponda a
 observa en la Figura 6.
 */
 
-int main()
-{
-    cout << "Hello World!" << endl;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
+    case 3: {
+        char cad1[100];
+        char cad2[100];
+        cout << "Ingrese la primera cadena:" << endl;
+        cin >> cad1;
+        cout << "Ingrese la segunda cadena:" << endl;
+        cin >> cad2;
+        bool iguales = problema3(cad1, cad2);
+        cout << "Resultado: " << (iguales ? "Las cadenas son iguales" : "Las cadenas son diferentes") << endl;
+    }
+    break;
+
+    case 5: {
+        int numero;
+        char resultado[20];
+        cout << "Ingrese un numero entero:" << endl;
+        cin >> numero;
+        problema5(numero, resultado);
+        cout << "La cadena resultante es: \"" << resultado << "\"" << endl;
+    }
+    break;
+
+    case 7: {
+        char original[200];
+        char resultado[200];
+        cout << "Ingrese una cadena (sin espacios):" << endl;
+        cin >> original;
+        problema7(original, resultado);
+        cout<<"Resultado: " << resultado << endl;
+    }
+    break;
+
+    case 9: {
+        char numeros[200];
+        int n;
+        cout << "Ingrese la cadena numerica:" << endl;
+        cin >> numeros;
+        cout << "Ingrese el valor de n:" << endl;
+        cin >> n;
+        long long suma = problema9(numeros, n);
+        cout << "Original: " << numeros << "." << endl;
+        cout << "Suma: " << suma << endl;
+    }
+    break;
+
+    case 11: {
+
+    }
+    break;
+
+    case 13: {
+        const int FILAS13 = 6, COLS13 = 8;
+        int imagen[FILAS13][COLS13] = {
+            {0, 3, 4, 0, 0, 0, 6, 8},
+            {5, 13, 6, 0, 0, 0, 2, 3},
+            {2, 6, 2, 7, 3, 0, 10, 0},
+            {0, 0, 4, 15, 4, 1, 6, 0},
+            {0, 0, 7, 12, 6, 9, 10, 4},
+            {5, 0, 6, 10, 6, 4, 8, 0}
+        };
+        // Se pasa la direccion del primer elemento de la matriz (puntero)
+        int estrellas = problema13(&imagen[0][0], FILAS13, COLS13);
+        cout << "Numero de estrellas encontradas: " << estrellas << endl;
+    }
+    break;
+
+    case 15: {
+
+    }
+    break;
+
+    case 17: {
+
+    }
+    break;
+    }
+
     return 0;
 }
+*/
