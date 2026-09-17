@@ -21,8 +21,8 @@ int main() {
     }
 
     case 3: {
-        char cadena1[100];
-        char cadena2[100];
+        char cadena1[10];
+        char cadena2[10];
         cout << "Ingrese la primera cadena: ";
         cin >> cadena1;
         cout << "Ingrese la segunda cadena: ";

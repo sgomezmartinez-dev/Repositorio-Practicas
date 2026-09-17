@@ -12,51 +12,47 @@ void problema1(const int* denominaciones, int tamano, int* dinero) {
 
 bool problema3(const char* cad1, const char* cad2) {
     int i = 0;
-    while (*(cad1 + i) != '\0' && *(cad2 + i) != '\0') {
+    while (*(cad1 + i) && *(cad2 + i)) {
         if (*(cad1 + i) != *(cad2 + i)) {
             return false;
         }
         i++;
     }
-    return (*(cad1 + i) == '\0' && *(cad2 + i) == '\0');
+    return (!*(cad1 + i) && !*(cad2 + i));
 }
 
 void problema5(const int* numero, char* cadena) {
-    int temp = *numero;
-    if (temp == 0) {
-        *(cadena + 0) = '0';
-        *(cadena + 1) = '\0';
+    int save = *numero;
+    if (save == 0) {
+        cadena[0] = '0';
+        cadena[1] = 0;
         return;
     }
-    bool esNegativo = false;
-    if (temp < 0) {
-        esNegativo = true;
-        temp = -temp;
-    }
-    int tempCopia = temp;
+    bool esNegativo = save < 0;
+    save = esNegativo ? -save : save;
+    int saveCopia = save;
     int longitud = 0;
-    while (tempCopia > 0) {
+    while ( saveCopia > 0) {
         longitud++;
-        tempCopia /= 10;
+        saveCopia /= 10;
     }
 
     if (esNegativo) {
         longitud++;
     }
-    *(cadena + longitud) = '\0';
+    cadena[longitud] = 0;
     int pos = longitud - 1;
-    while (temp > 0) {
-        int digito = temp % 10;
-        *(cadena + pos) = '0' + digito;
-        temp /= 10;
+    while (save > 0) {
+        int digito = save % 10;
+        cadena[pos] = 48 + digito;
+        save /= 10;
         pos--;
     }
 
     if (esNegativo) {
-        *(cadena + 0) = '-';
+        cadena[0] = '-';
     }
 }
-
 void problema7(const char* entrada, char* salida) {
     int i = 0;
     int j = 0;
@@ -82,7 +78,7 @@ void problema7(const char* entrada, char* salida) {
     }
 }
 
-// Renombrada de sumarBloques a problema9
+
 void problema9(const char* cadena, const int* n, int* resultadoSuma) {
     int len = 0;
     while (*(cadena + len) != '\0') {
@@ -116,7 +112,7 @@ void problema9(const char* cadena, const int* n, int* resultadoSuma) {
     *resultadoSuma = sumaTotal;
 }
 
-// Renombrada de gestionarCine a problema11
+
 void problema11(char* sala, const int* filas, const int* cols, const char* accion, const char* filaLetra, const int* numAsiento) {
     char op = *accion;
     if (op == 'I') {
@@ -207,32 +203,22 @@ void problema15(const int* rectA, const int* rectB, int* rectC) {
 }
 
 void problema17(const int* limite, int* resultadoSuma) {
-    int n = *limite;
-    int sumaTotal = 0;
-
-    for (int i = 1; i <= n; i++) {
-        int sumaA = 0;
-        for (int d = 1; d <= i / 2; d++) {
-            if (i % d == 0) {
-                sumaA += d;
-            }
-        }
-
-        int b = sumaA;
-
-        if (b != i && b > 0) {
-            int sumaB = 0;
-            for (int d = 1; d <= b / 2; d++) {
-                if (b % d == 0) {
-                    sumaB += d;
-                }
-            }
-
-            if (sumaB == i) {
-                sumaTotal += i;
-            }
+    int a = *limite;
+    int b = 0;
+    for (int d = 1; d <= a / 2; d++) {
+        if (a % d == 0) {
+            b += d;
         }
     }
-
-    *resultadoSuma = sumaTotal;
+    int sumaB = 0;
+    for (int d = 1; d <= b / 2; d++) {
+        if (b % d == 0) {
+            sumaB += d;
+        }
+    }
+    if (sumaB == a && a != b) {
+        *resultadoSuma = a + b;
+    } else {
+        *resultadoSuma = 0;
+    }
 }
