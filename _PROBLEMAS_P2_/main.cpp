@@ -102,6 +102,24 @@ int main() {
         } while (subOpcion != 4);
         break;
     }
+
+    case 13: {
+        const int FILAS = 6;
+        const int COLS = 8;
+        int imagen[6][8] = {
+            {0,  3, 4,  0, 0, 0,  6, 8},
+            {5, 13, 6,  0, 0, 0,  2, 3},
+            {2,  6, 2,  7, 3, 0, 10, 0},
+            {0,  0, 4, 15, 4, 1,  6, 0},
+            {0,  0, 7, 12, 6, 9, 10, 4},
+            {5,  0, 6, 10, 6, 4,  8, 0}
+        };
+        int estrellas = 0;
+        problema13((const int*)imagen, &FILAS, &COLS, &estrellas);
+        cout << "Numero de estrellas encontradas en la imagen: " << estrellas << endl;
+        break;
+    }
+
     case 15: {
         int rectA[4];
         int rectB[4];
