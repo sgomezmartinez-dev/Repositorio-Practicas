@@ -176,21 +176,14 @@ void problema13(const int* imagen, const int* filas, const int* cols, int* numEs
     int f = *filas;
     int c = *cols;
     int contador = 0;
-
-    // Se recorre la matriz omitiendo la primera y ultima fila/columna (bordes)
     for (int i = 1; i < f - 1; i++) {
         for (int j = 1; j < c - 1; j++) {
-            // Lectura de intensidad del punto central y sus 4 vecinos con aritmetica de punteros 2D
             int centro    = *(imagen + i * c + j);
             int izquierda = *(imagen + i * c + (j - 1));
             int derecha   = *(imagen + i * c + (j + 1));
             int arriba    = *(imagen + (i - 1) * c + j);
             int abajo     = *(imagen + (i + 1) * c + j);
-
-            // Calculo de la suma de intensidades en forma de cruz
             int suma = centro + izquierda + derecha + arriba + abajo;
-
-            // Criterio de estrella: promedio > 6  <=>  suma > 30
             if (suma > 30) {
                 contador++;
             }
@@ -249,4 +242,4 @@ void problema17(const int* limite, int* resultadoSuma) {
     } else {
         *resultadoSuma = 0;
     }
-}
+  }
