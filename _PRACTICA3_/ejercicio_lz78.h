@@ -1,0 +1,10 @@
+#ifndef EJERCICIO_LZ78_H
+#define EJERCICIO_LZ78_H
+
+class EJERCICIO_LZ78
+{
+public:
+    EJERCICIO_LZ78();
+};
+
+#endif // EJERCICIO_LZ78_H
