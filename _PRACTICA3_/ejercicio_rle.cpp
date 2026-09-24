@@ -27,7 +27,7 @@ std::string RLECompresion(const std::string& strTexto) {
 
     return result;
 }
-std::string RLEDecompresion(const std::string& strTexto) {
+std::string RLEDescompresion(const std::string& strTexto) {
     // Excepción 3: Formato inválido (Lanza un código entero de error, ej: 707)
     if (strTexto.empty() || !std::isdigit(strTexto[0])) {
         throw 707;

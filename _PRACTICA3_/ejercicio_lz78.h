@@ -12,30 +12,26 @@ const int ERR_PREFIJO_INEXIST   = 5;
 const int ERR_INDICE_FUERA      = 6;
 const int ERR_TERMINADOR        = 7;
 const int ERR_VERIFICACION      = 8;
+// Cada entrada del diccionario es un par (prefijo, caracter)
 struct Entry {
     int indice;
     char caracter;
 };
-class Diccionario {
-private:
+// Diccionario: solo datos
+struct Diccionario {
     Entry* datos;
     int tam;
     int capacidad;
-
-    void redimensionar();
-public:
-    Diccionario(int capInicial = 16);
-    ~Diccionario();
-    Diccionario(const Diccionario&) = delete;
-    Diccionario& operator=(const Diccionario&) = delete;
-
-    int buscar(int indice, char caracter) const;
-    int agregar(int indice, char caracter);
-    const Entry& obtener(int i) const;
-    int tamanio() const;
-    int longitudFrase(int i) const;
-    int escribirFrase(int i, char* destino) const;
 };
+// ---- Funciones que trabajan sobre el diccionario ----
+void dicInicializar(Diccionario& d, int capInicial = 16);
+void dicLiberar(Diccionario& d);
+int dicBuscar(const Diccionario& d, int indice, char caracter);
+int dicAgregar(Diccionario& d, int indice, char caracter);
+const Entry& dicObtener(const Diccionario& d, int i);
+int dicLongitudFrase(const Diccionario& d, int i);
+int dicEscribirFrase(const Diccionario& d, int i, char* destino);
+// ---- Compresion / descompresion ----
 Entry* comprimirLZ78(const char* texto, int& cantidad);
 char* descomprimirLZ78(const Entry* pares, int cantidad);
 void verificarTexto(const char* original, const char* reconstruido);

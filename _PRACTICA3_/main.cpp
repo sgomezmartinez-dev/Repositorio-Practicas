@@ -21,10 +21,8 @@ int main() {
     char* rec = nullptr;
     unsigned char* cifrado = nullptr;
     unsigned char* recuperado = nullptr;
-
     try {
         switch (x) {
-
         case 1: {   // ===== LZ78 =====
             cout << "Texto a comprimir: ";
             cin.width(256);
@@ -40,7 +38,6 @@ int main() {
             cout << "Verificacion: los textos son IDENTICOS\n";
             break;
         }
-
         case 2: {   // ===== RLE (aqui si se permite std::string) =====
             string cadena;
             cout << "Texto a comprimir (sin numeros): ";
@@ -49,7 +46,7 @@ int main() {
             string comprimido = RLECompresion(cadena);
             cout << "Comprimido: " << comprimido << endl;
 
-            string descomprimido = RLEDecompresion(comprimido);
+            string descomprimido = RLEDescompresion(comprimido);
             cout << "Descomprimido: " << descomprimido << endl;
 
             if (descomprimido == cadena)
@@ -58,15 +55,13 @@ int main() {
                 cout << "Verificacion: los textos son DIFERENTES\n";
             break;
         }
-
         case 3: {   // ===== RLE: solo descomprimir =====
             string cadena;
             cout << "Cadena RLE (ej: 3A2B1C): ";
             cin >> cadena;
-            cout << "Descomprimido: " << RLEDecompresion(cadena) << endl;
+            cout << "Descomprimido: " << RLEDescompresion(cadena) << endl;
             break;
         }
-
         case 4: {   // ===== Encriptacion / desencriptacion =====
             cout << "Texto a encriptar: ";
             cin.width(256);
@@ -96,7 +91,6 @@ int main() {
             cout << "Verificacion: los datos son IDENTICOS\n";
             break;
         }
-
         default:
             cout << "Opcion no valida.\n";
             break;
@@ -113,9 +107,6 @@ int main() {
     }
     catch (const ErrorLZ78& e) {
         cerr << "[ErrorLZ78] (" << e.codigo << ") " << e.mensaje << endl;
-    }
-    catch (const ErrorCifrado& e) {
-        cerr << "[ErrorCifrado] (" << e.codigo << ") " << e.mensaje << endl;
     }
     catch (...) {
         cerr << "[Error desconocido]" << endl;

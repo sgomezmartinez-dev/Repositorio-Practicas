@@ -7,17 +7,16 @@ static void validarParametros(const unsigned char* datos, int longitud, int n) {
     if (longitud <= 0)
         throw "La longitud debe ser mayor que 0";
     if (n <= 0 || n >= 8)
-        throw 3001;
+        throw "n debe estar entre 1 y 7";
 }
 unsigned char rotarIzquierda(unsigned char byte, int n) {
     if (n <= 0 || n >= 8)
-        throw 3001;
+        throw "n debe estar entre 1 y 7";
     return (unsigned char)((byte << n) | (byte >> (8 - n)));
 }
-
 unsigned char rotarDerecha(unsigned char byte, int n) {
     if (n <= 0 || n >= 8)
-        throw 3001;
+        throw "n debe estar entre 1 y 7";
     return (unsigned char)((byte >> n) | (byte << (8 - n)));
 }
 unsigned char* encriptar(const unsigned char* datos, int longitud, int n, unsigned char K) {
@@ -45,7 +44,7 @@ void verificarBytes(const unsigned char* a, const unsigned char* b, int longitud
         throw "Arreglo nulo en la verificacion";
     for (int i = 0; i < longitud; i++) {
         if (a[i] != b[i])
-            throw ErrorCifrado{4001, "Los datos recuperados NO son identicos a los originales"};
+            throw "Los datos recuperados NO son identicos a los originales";
     }
 }
 void imprimirHex(const unsigned char* datos, int longitud) {
@@ -55,3 +54,4 @@ void imprimirHex(const unsigned char* datos, int longitud) {
     }
     cout << endl;
 }
+
