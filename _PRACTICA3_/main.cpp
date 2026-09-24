@@ -4,16 +4,18 @@
 #include "ejercicio_lz78.h"
 #include "ejercicio_rle.h"
 #include "encriptacion_desencriptacion.h"
+
 using namespace std;
+
 int main() {
     int x = 0;
     cout << "1. LZ78 (comprimir y descomprimir)\n"
          << "2. RLE (comprimir y descomprimir)\n"
-         << "3. RLE (descomprimir una cadena, ej: 3A2B)\n"
-         << "4. Encriptar y desencriptar texto\n";
-    cout << "Ingrese el problema que desea ejecutar ( | 1 | 2 | 3 | 4 | ):" << endl;
+         << "3. Encriptar y desencriptar texto\n";
+    cout << "Ingrese el problema que desea ejecutar ( | 1 | 2 | 3 | ):" << endl;
     cin >> x;
-    char texto[256];
+
+    char texto[100];
     int n = 0, k = 0, longitud = 0, cantidad = 0;
     unsigned char K = 0;
     const unsigned char* datos = nullptr;
@@ -21,11 +23,11 @@ int main() {
     char* rec = nullptr;
     unsigned char* cifrado = nullptr;
     unsigned char* recuperado = nullptr;
+
     try {
         switch (x) {
         case 1: {   // ===== LZ78 =====
             cout << "Texto a comprimir: ";
-            cin.width(256);
             cin >> texto;
 
             pares = comprimirLZ78(texto, cantidad);
@@ -55,14 +57,7 @@ int main() {
                 cout << "Verificacion: los textos son DIFERENTES\n";
             break;
         }
-        case 3: {   // ===== RLE: solo descomprimir =====
-            string cadena;
-            cout << "Cadena RLE (ej: 3A2B1C): ";
-            cin >> cadena;
-            cout << "Descomprimido: " << RLEDescompresion(cadena) << endl;
-            break;
-        }
-        case 4: {   // ===== Encriptacion / desencriptacion =====
+        case 3: {   // ===== Encriptacion / desencriptacion =====
             cout << "Texto a encriptar: ";
             cin.width(256);
             cin >> texto;
@@ -111,6 +106,7 @@ int main() {
     catch (...) {
         cerr << "[Error desconocido]" << endl;
     }
+
     // ---------- Liberar memoria (siempre, haya o no error) ----------
     delete[] pares;
     delete[] rec;

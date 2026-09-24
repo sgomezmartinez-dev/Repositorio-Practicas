@@ -1,5 +1,5 @@
 #include "ejercicio_rle.h"
-#include <cctype>
+ #include <cctype>
 std::string RLECompresion(const std::string& strTexto) {
     // Excepción 1: Cadena vacía (Lanza un const char*)
     if (strTexto.empty()) {

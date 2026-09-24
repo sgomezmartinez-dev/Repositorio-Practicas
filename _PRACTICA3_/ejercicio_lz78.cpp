@@ -5,7 +5,7 @@ using namespace std;
 void lanzarError(int codigo, const char* mensaje) {
     throw ErrorLZ78{codigo, mensaje};
 }
-// ================= Diccionario =================
+// 1 DICCIONARIO
 void dicInicializar(Diccionario& d, int capInicial) {
     if (capInicial < 1)
         lanzarError(ERR_CAPACIDAD, "La capacidad inicial debe ser >= 1");
@@ -69,31 +69,31 @@ int dicEscribirFrase(const Diccionario& d, int i, char* destino) {
     }
     return largo;
 }
-// ================= Compresion =================
+// 2 COMPRESION
 Entry* comprimirLZ78(const char* texto, int& cantidad) {
     if (texto == nullptr)
         lanzarError(ERR_TEXTO_NULO, "El texto es nulo");
     if (texto[0] == '\0')
         lanzarError(ERR_TEXTO_VACIO, "El texto esta vacio");
 
-    int n = (int)strlen(texto);
+    int n = (int)strlen(texto); // longitud del texto n
     Diccionario dic;
     dicInicializar(dic, 16);
     Entry* salida = nullptr;
     try {
         salida = new Entry[n + 1];
 
-        cantidad = 0;
+        cantidad = 0; //recorre caracter c
         int prefijo = 0;
         for (int i = 0; texto[i] != '\0'; i++) {
             char c = texto[i];
-            int idx = dicBuscar(dic, prefijo, c);
+            int idx = dicBuscar(dic, prefijo, c); // busca en si la combinación ya existe
 
-            if (idx != -1) {
-                prefijo = idx;
-            } else {
-                salida[cantidad].indice = prefijo;
-                salida[cantidad].caracter = c;
+            if (idx != -1) { // si ya existe
+                prefijo = idx;// actualiza
+            } else { // sino
+                salida[cantidad].indice = prefijo; // Se guarda el nuevo cracter en salida que contiene el prefijo anterior
+                salida[cantidad].caracter = c; // guarda el caracter actual c
                 cantidad++;
                 dicAgregar(dic, prefijo, c);
                 prefijo = 0;
@@ -102,7 +102,7 @@ Entry* comprimirLZ78(const char* texto, int& cantidad) {
         if (prefijo != 0) {
             salida[cantidad].indice = prefijo;
             salida[cantidad].caracter = '\0';
-            cantidad++;
+            cantidad++; //Para no perder esta información, se emite un último token apuntando a ese prefijo y acompañado del carácter nulo \0
         }
     } catch (...) {
         // Si algo falla, se libera todo y se relanza la misma excepcion
@@ -114,13 +114,13 @@ Entry* comprimirLZ78(const char* texto, int& cantidad) {
     dicLiberar(dic);
     return salida;
 }
-// ================= Descompresion =================
-void asegurarCapacidad78(char*& buf, int& cap, int necesario) {
+// 2 DESCOMPRESION
+void asegurarCapacidad78(char*& buf, int& cap, int necesario) { //gestor de memoria dinámica
     if (necesario <= cap) return;
     int nuevaCap = cap * 2;
     if (nuevaCap < necesario) nuevaCap = necesario;
     char* nuevo = new char[nuevaCap];
-    memcpy(nuevo, buf, cap);
+    memcpy(nuevo, buf, cap); //copiar un bloque de memoria de un lugar a otro byte por byte
     delete[] buf;
     buf = nuevo;
     cap = nuevaCap;
@@ -131,14 +131,14 @@ char* descomprimirLZ78(const Entry* pares, int cantidad) {
 
     Diccionario dic;
     dicInicializar(dic, 16);
-    int cap = 64;
+    int cap = 64; // capacidad inical
     int len = 0;
     char* out = nullptr;
 
     try {
         out = new char[cap];
 
-        for (int k = 0; k < cantidad; k++) {
+        for (int k = 0; k < cantidad; k++) { // recorre cada par del arreglo comprimido
             int prefijo = pares[k].indice;
             char c = pares[k].caracter;
             if (prefijo < 0 || prefijo >= dic.tam)
@@ -168,7 +168,7 @@ char* descomprimirLZ78(const Entry* pares, int cantidad) {
     dicLiberar(dic);
     return out;
 }
-// ================= Verificacion y salida =================
+// 3 Verificacion y salida
 void verificarTexto(const char* original, const char* reconstruido) {
     if (original == nullptr || reconstruido == nullptr)
         lanzarError(ERR_TEXTO_NULO, "Texto nulo en la verificacion");

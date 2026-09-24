@@ -23,7 +23,7 @@ struct Diccionario {
     int tam;
     int capacidad;
 };
-// ---- Funciones que trabajan sobre el diccionario ----
+//  Funciones  diccionario
 void dicInicializar(Diccionario& d, int capInicial = 16);
 void dicLiberar(Diccionario& d);
 int dicBuscar(const Diccionario& d, int indice, char caracter);
@@ -31,7 +31,7 @@ int dicAgregar(Diccionario& d, int indice, char caracter);
 const Entry& dicObtener(const Diccionario& d, int i);
 int dicLongitudFrase(const Diccionario& d, int i);
 int dicEscribirFrase(const Diccionario& d, int i, char* destino);
-// ---- Compresion / descompresion ----
+// Compresion Y descompresion
 Entry* comprimirLZ78(const char* texto, int& cantidad);
 char* descomprimirLZ78(const Entry* pares, int cantidad);
 void verificarTexto(const char* original, const char* reconstruido);

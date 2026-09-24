@@ -1,7 +1,7 @@
 #include "encriptacion_desencriptacion.h"
 #include <iostream>
 using namespace std;
-static void validarParametros(const unsigned char* datos, int longitud, int n) {
+void validarParametrosED(const unsigned char* datos, int longitud, int n) {
     if (datos == nullptr)
         throw "El arreglo de datos es nulo";
     if (longitud <= 0)
@@ -20,7 +20,7 @@ unsigned char rotarDerecha(unsigned char byte, int n) {
     return (unsigned char)((byte >> n) | (byte << (8 - n)));
 }
 unsigned char* encriptar(const unsigned char* datos, int longitud, int n, unsigned char K) {
-    validarParametros(datos, longitud, n);
+    validarParametrosED(datos, longitud, n);
 
     unsigned char* salida = new unsigned char[longitud];
     for (int i = 0; i < longitud; i++) {
@@ -30,7 +30,7 @@ unsigned char* encriptar(const unsigned char* datos, int longitud, int n, unsign
     return salida;
 }
 unsigned char* desencriptar(const unsigned char* datos, int longitud, int n, unsigned char K) {
-    validarParametros(datos, longitud, n);
+    validarParametrosED(datos, longitud, n);
 
     unsigned char* salida = new unsigned char[longitud];
     for (int i = 0; i < longitud; i++) {
