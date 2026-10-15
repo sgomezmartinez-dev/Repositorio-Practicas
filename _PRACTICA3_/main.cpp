@@ -3,16 +3,17 @@
 #include <cstring>
 #include "ejercicio_lz78.h"
 #include "ejercicio_rle.h"
+#include "integracion.h"
 #include "encriptacion_desencriptacion.h"
-
 using namespace std;
 
 int main() {
     int x = 0;
     cout << "1. LZ78 (comprimir y descomprimir)\n"
          << "2. RLE (comprimir y descomprimir)\n"
-         << "3. Encriptar y desencriptar texto\n";
-    cout << "Ingrese el problema que desea ejecutar ( | 1 | 2 | 3 | ):" << endl;
+         << "3. Encriptar y desencriptar texto\n"
+         << "4. Ejercicio 5.4 \n";
+    cout << "Ingrese el problema que desea ejecutar ( | 1 | 2 | 3 | 4 | ):" << endl;
     cin >> x;
 
     char texto[100];
@@ -26,7 +27,7 @@ int main() {
 
     try {
         switch (x) {
-        case 1: {   // ===== LZ78 =====
+        case 1: {   // LZ78
             cout << "Texto a comprimir: ";
             cin >> texto;
 
@@ -40,7 +41,7 @@ int main() {
             cout << "Verificacion: los textos son IDENTICOS\n";
             break;
         }
-        case 2: {   // ===== RLE (aqui si se permite std::string) =====
+        case 2: {   // RLE
             string cadena;
             cout << "Texto a comprimir (sin numeros): ";
             cin >> cadena;
@@ -57,7 +58,7 @@ int main() {
                 cout << "Verificacion: los textos son DIFERENTES\n";
             break;
         }
-        case 3: {   // ===== Encriptacion / desencriptacion =====
+        case 3: {   // Encriptacion / desencriptacion
             cout << "Texto a encriptar: ";
             cin.width(256);
             cin >> texto;
@@ -86,10 +87,16 @@ int main() {
             cout << "Verificacion: los datos son IDENTICOS\n";
             break;
         }
+        case 4:{ // 5.4
+            ejecutarIntegracion();
+
+        break;
+        }
         default:
             cout << "Opcion no valida.\n";
             break;
         }
+
     }
     catch (const char* msg) {
         cerr << "[Error const char*] " << msg << endl;
@@ -107,7 +114,7 @@ int main() {
         cerr << "[Error desconocido]" << endl;
     }
 
-    // ---------- Liberar memoria (siempre, haya o no error) ----------
+    //Liberar memoria (siempre, haya o no error)
     delete[] pares;
     delete[] rec;
     delete[] cifrado;
@@ -115,3 +122,4 @@ int main() {
 
     return 0;
 }
+

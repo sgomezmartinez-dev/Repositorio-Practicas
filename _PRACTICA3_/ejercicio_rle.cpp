@@ -1,5 +1,6 @@
 #include "ejercicio_rle.h"
  #include <cctype>
+#include <cstring>
 std::string RLECompresion(const std::string& strTexto) {
     // Excepción 1: Cadena vacía (Lanza un const char*)
     if (strTexto.empty()) {
@@ -51,4 +52,20 @@ std::string RLEDescompresion(const std::string& strTexto) {
     }
 
     return resultado;
+}
+
+unsigned char* rleComprimirBytes(const char* texto, int& longitud) {
+    std::string comp = RLECompresion(std::string(texto));
+    longitud = (int)comp.length();
+    unsigned char* out = new unsigned char[longitud];
+    memcpy(out, comp.c_str(), longitud);
+    return out;
+}
+
+char* rleDescomprimirBytes(const unsigned char* datos, int longitud) {
+    std::string comp(reinterpret_cast<const char*>(datos), longitud);
+    std::string des = RLEDescompresion(comp);
+    char* out = new char[des.length() + 1];
+    memcpy(out, des.c_str(), des.length() + 1);
+    return out;
 }
