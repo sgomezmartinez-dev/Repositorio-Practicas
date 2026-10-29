@@ -1,0 +1,130 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include "Red.h"
+
+using namespace std;
+
+int main() {
+    Red red;
+    int opcion;
+
+    do {
+        cout << "\n|******* SIMULADOR DE RED DE ENRUTADORES *******|\n" << endl;
+        cout << "1. Mostrar tablas de costos" << endl;
+        cout << "2. Agregar enrutador" << endl;
+        cout << "3. Eliminar enrutador" << endl;
+        cout << "4. Agregar enlace" << endl;
+        cout << "5. Eliminar enlace" << endl;
+        //PARTE 2
+        cout << "6. Camino minimo entre dos enrutadores" << endl;
+        cout << "7. Cargar red desde archivo" << endl;
+        cout << "8. Guardar red en archivo" << endl;
+        cout << "0. Salir" << endl;
+
+        cout << "Seleccione una opcion: ";
+        cin >> opcion;
+        switch (opcion) {
+        case 2: {
+            string nombre;
+            cout << "Nombre del nuevo enrutador: ";
+            cin >> nombre;
+            if (red.agregarEnrutador(nombre))
+                cout << "Enrutador " << nombre << " agregado." << endl;
+            else
+                cout << "No se pudo agregar (el nombre ya existe)." << endl;
+            break;
+        }
+        case 3: {
+            string nombre;
+            cout << "Nombre del enrutador a eliminar: ";
+            cin >> nombre;
+            if (red.eliminarEnrutador(nombre))
+                cout << "Enrutador " << nombre << " eliminado." << endl;
+            else
+                cout << "No se pudo eliminar (no existe)." << endl;
+            break;
+        }
+        case 4: {
+            string a, b;
+            int costo;
+            cout << "Enrutador origen: ";
+            cin >> a;
+            cout << "Enrutador destino: ";
+            cin >> b;
+            cout << "Costo del enlace: ";
+            cin >> costo;
+            if (red.agregarEnlace(a, b, costo))
+                cout << "Enlace " << a << " - " << b << " agregado." << endl;
+            else
+                cout << "No se pudo agregar (revise que existan, sean distintos y el costo sea mayor a 0)." << endl;
+            break;
+        }
+        case 5: {
+            string a, b;
+            cout << "Enrutador origen: ";
+            cin >> a;
+            cout << "Enrutador destino: ";
+            cin >> b;
+            if (red.eliminarEnlace(a, b))
+                cout << "Enlace " << a << " - " << b << " eliminado." << endl;
+            else
+                cout << "No se pudo eliminar (algun enrutador no existe)." << endl;
+            break;
+        }
+            //PARTE 2
+        case 6: {
+            string a, b;
+            vector<string> camino;
+            int costo;
+            cout << "Enrutador origen: ";
+            cin >> a;
+            cout << "Enrutador destino: ";
+            cin >> b;
+            if (red.obtenerCamino(a, b, camino, costo)) {
+                cout << "Camino: ";
+                for (size_t i = 0; i < camino.size(); ++i) {
+                    cout << camino[i];
+                    if (i + 1 < camino.size()) cout << " -> ";
+                }
+                cout << "\nCosto total: " << costo << endl;
+            } else {
+                cout << "No hay camino (algun enrutador no existe o no hay ruta)." << endl;
+            }
+            break;
+        }
+        case 7: {
+            string ruta;
+            cout << "Ruta del archivo: ";
+            cin >> ruta;
+            if (red.cargarDesdeArchivo(ruta))
+                cout << "Red cargada correctamente." << endl;
+            else
+                cout << "No se pudo abrir el archivo." << endl;
+            break;
+        }
+        case 8: {
+            string ruta;
+            cout << "Ruta del archivo a guardar: ";
+            cin >> ruta;
+            if (red.guardarEnArchivo(ruta))
+                cout << "Red guardada." << endl;
+            else
+                cout << "No se pudo escribir el archivo." << endl;
+            break;
+        }
+
+        case 1:
+            red.mostrarTablas();
+            break;
+        case 0:
+            break;
+        default:
+            cout << "Opcion no valida." << endl;
+        }
+
+    } while (opcion != 0);
+
+    cout << "Programa finalizado." << endl;
+    return 0;
+}
