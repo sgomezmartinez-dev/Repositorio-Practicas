@@ -1,0 +1,8 @@
++Red de la Figura 1 de la guía
+
+A B 4
+A C 10
+A D 5
+B C 3
+B D 1
+C D 2
